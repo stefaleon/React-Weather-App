@@ -2,11 +2,15 @@ var React = require('react');
 
 var WeatherMessage = React.createClass({
   render: function () {
-    var {msgLocation, msgDesc, msgTemp, msgName, msgCountry } = this.props;
+    var {msgLocation, msgDesc, msgTemp, msgName, msgCountry, msgIcon} = this.props;
+    var imgSource = "http://openweathermap.org/img/w/" + msgIcon + ".png";
+    var tempDisplayed = Math.round(msgTemp) + "°C";
     return(
-      <div>
-        <h3 className="text-center"> We have {msgDesc} in {msgName}, {msgCountry} </h3>
-        <h3 className="text-center"> The temperature is {msgTemp}. </h3>
+      <div className="text-center">
+        <h3> {msgName}, {msgCountry} </h3>
+        <img src={imgSource} width="100"/>
+        <h3> {msgDesc} </h3>
+        <h3> {tempDisplayed} </h3>
       </div>
     );
   }
