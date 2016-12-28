@@ -1,24 +1,29 @@
-var React = require('react');
+const React = require('react');
 
-var WeatherForm = React.createClass({
-  onFormSubmit: function(e){
-    e.preventDefault();
-    var submittedLocation = this.refs.location.value;
-    if (submittedLocation.length > 0){
-      this.refs.location.value = '';
-      this.props.onSearch(submittedLocation);
+const WeatherForm = React.createClass({
+    onFormSubmit: function (e) {
+        e.preventDefault();
+        var newSearchData={};
+        console.log('in Form-onFormSubmit, this.refs.location.value is:', this.refs.location.value);
+        // do not act on click if no data have been typed in
+        if (this.refs.location.value.length > 0) {
+            newSearchData.location = this.refs.location.value;
+        }
+        // call onNewSearch with the newSearchData object argument
+        this.props.onNewSearch(newSearchData);
+        // clear form after input has been used
+        this.refs.location.value = '';
+    },
+    render: function () {
+        return (
+            <div>
+                <form onSubmit={this.onFormSubmit}>
+                    <input type="text" ref="location" placeholder="Enter location"/>
+                    <input type="submit" value="Get Weather" />
+                </form>
+            </div>
+        );
     }
-  },
-  render: function () {
-    return(
-      <div>
-        <form onSubmit={this.onFormSubmit}>
-          <input type="text" ref="location" placeholder="Search Weather by City" />
-          <button className="button hollow expanded ">Get Weather</button>
-        </form>
-      </div>
-    );
-  }
 });
 
 module.exports = WeatherForm;

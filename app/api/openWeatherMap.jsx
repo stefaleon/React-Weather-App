@@ -16,8 +16,7 @@ module.exports = {
           apiTemp: res.data.main.temp,
           apiDesc: res.data.weather[0].description,
           apiCountry: res.data.sys.country,
-          apiName: res.data.name,
-          apiIcon: res.data.weather[0].icon        
+          apiName: res.data.name
         };
       }
     }, function (res) {
@@ -25,7 +24,3 @@ module.exports = {
     } );
   }
 };
-
-
-// const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/find?units=metric&appid=b937724d4d3febfcc804ce1e1965fc68';
-// const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?appid=b937724d4d3febfcc804ce1e1965fc68&units=metric';
