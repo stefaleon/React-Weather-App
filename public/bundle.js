@@ -26601,7 +26601,8 @@
 	        msgIcon = _ref.msgIcon;
 
 	    var imgSource = "http://openweathermap.org/img/w/" + msgIcon + ".png";
-	    var tempDisplayed = Math.round(msgTemp) + "°C";
+	    var tempC = Math.round(msgTemp) + "°C";
+	    var tempF = Math.round(msgTemp * 9 / 5 + 32) + "°F";
 	    return React.createElement(
 	        "div",
 	        { className: "text-center" },
@@ -26626,7 +26627,9 @@
 	            "h3",
 	            null,
 	            " ",
-	            tempDisplayed,
+	            tempC,
+	            " / ",
+	            tempF,
 	            " "
 	        )
 	    );

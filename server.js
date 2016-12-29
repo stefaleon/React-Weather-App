@@ -2,6 +2,15 @@ const express=require('express');
 const app=express();
 const PORT = process.env.PORT || 3000;
 
+// redirect https traffic to http, due to open weather api restriction
+app.use(function (req, res, next) {
+	if (req.headers['x-forwarded-proto'] === 'http') {
+		next();
+	} else {
+		res.redirect('http://' + req.hostname + req.url);
+	}
+});
+
 app.use(express.static(`${__dirname}/public`));
 
 app.listen(PORT, process.env.IP, () => {
