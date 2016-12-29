@@ -26399,23 +26399,19 @@
 	var React = __webpack_require__(1);
 	var Nav = __webpack_require__(234);
 
-	var Main = React.createClass({
-	    displayName: 'Main',
-
-	    render: function render() {
-	        return React.createElement(
-	            'div',
+	var Main = function Main(props) {
+	    return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(Nav, null),
+	        React.createElement(
+	            'h2',
 	            null,
-	            React.createElement(Nav, null),
-	            React.createElement(
-	                'h2',
-	                null,
-	                'Main Component'
-	            ),
-	            this.props.children
-	        );
-	    }
-	});
+	            'Main Component'
+	        ),
+	        props.children
+	    );
+	};
 
 	module.exports = Main;
 
@@ -26431,36 +26427,32 @@
 	    Link = _require.Link,
 	    IndexLink = _require.IndexLink;
 
-	var Nav = React.createClass({
-	  displayName: 'Nav',
-
-	  render: function render() {
+	var Nav = function Nav() {
 	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'h2',
+	        'div',
 	        null,
-	        'Nav Component'
-	      ),
-	      React.createElement(
-	        IndexLink,
-	        { to: '/', activeClassName: 'active', activeStyle: { fontWeight: 'bold' } },
-	        'Get Weather'
-	      ),
-	      React.createElement(
-	        Link,
-	        { to: '/about', activeClassName: 'active', activeStyle: { fontWeight: 'bold' } },
-	        'About'
-	      ),
-	      React.createElement(
-	        Link,
-	        { to: '/examples', activeClassName: 'active', activeStyle: { fontWeight: 'bold' } },
-	        'Examples'
-	      )
+	        React.createElement(
+	            'h2',
+	            null,
+	            'Nav Component'
+	        ),
+	        React.createElement(
+	            IndexLink,
+	            { to: '/', activeClassName: 'active', activeStyle: { fontWeight: 'bold' } },
+	            'Get Weather'
+	        ),
+	        React.createElement(
+	            Link,
+	            { to: '/about', activeClassName: 'active', activeStyle: { fontWeight: 'bold' } },
+	            'About'
+	        ),
+	        React.createElement(
+	            Link,
+	            { to: '/examples', activeClassName: 'active', activeStyle: { fontWeight: 'bold' } },
+	            'Examples'
+	        )
 	    );
-	  }
-	});
+	};
 
 	module.exports = Nav;
 
@@ -26600,50 +26592,45 @@
 
 	var React = __webpack_require__(1);
 
-	var WeatherMessage = React.createClass({
-	    displayName: "WeatherMessage",
+	var WeatherMessage = function WeatherMessage(_ref) {
+	    var msgLocation = _ref.msgLocation,
+	        msgDesc = _ref.msgDesc,
+	        msgTemp = _ref.msgTemp,
+	        msgName = _ref.msgName,
+	        msgCountry = _ref.msgCountry,
+	        msgIcon = _ref.msgIcon;
 
-	    render: function render() {
-	        var _props = this.props,
-	            msgLocation = _props.msgLocation,
-	            msgDesc = _props.msgDesc,
-	            msgTemp = _props.msgTemp,
-	            msgName = _props.msgName,
-	            msgCountry = _props.msgCountry,
-	            msgIcon = _props.msgIcon;
-
-	        var imgSource = "http://openweathermap.org/img/w/" + msgIcon + ".png";
-	        var tempDisplayed = Math.round(msgTemp) + "°C";
-	        return React.createElement(
-	            "div",
-	            { className: "text-center" },
-	            React.createElement(
-	                "h3",
-	                null,
-	                " ",
-	                msgName,
-	                ", ",
-	                msgCountry,
-	                " "
-	            ),
-	            React.createElement("img", { src: imgSource, width: "100" }),
-	            React.createElement(
-	                "h3",
-	                null,
-	                " ",
-	                msgDesc,
-	                " "
-	            ),
-	            React.createElement(
-	                "h3",
-	                null,
-	                " ",
-	                tempDisplayed,
-	                " "
-	            )
-	        );
-	    }
-	});
+	    var imgSource = "http://openweathermap.org/img/w/" + msgIcon + ".png";
+	    var tempDisplayed = Math.round(msgTemp) + "°C";
+	    return React.createElement(
+	        "div",
+	        { className: "text-center" },
+	        React.createElement(
+	            "h3",
+	            null,
+	            " ",
+	            msgName,
+	            ", ",
+	            msgCountry,
+	            " "
+	        ),
+	        React.createElement("img", { src: imgSource, width: "100" }),
+	        React.createElement(
+	            "h3",
+	            null,
+	            " ",
+	            msgDesc,
+	            " "
+	        ),
+	        React.createElement(
+	            "h3",
+	            null,
+	            " ",
+	            tempDisplayed,
+	            " "
+	        )
+	    );
+	};
 
 	module.exports = WeatherMessage;
 
@@ -28181,17 +28168,13 @@
 
 	var React = __webpack_require__(1);
 
-	var About = React.createClass({
-	    displayName: 'About',
-
-	    render: function render() {
-	        return React.createElement(
-	            'h2',
-	            null,
-	            'About Component'
-	        );
-	    }
-	});
+	var About = function About() {
+	    return React.createElement(
+	        'h2',
+	        null,
+	        'About Component'
+	    );
+	};
 
 	module.exports = About;
 
@@ -28203,17 +28186,13 @@
 
 	var React = __webpack_require__(1);
 
-	var Examples = React.createClass({
-	    displayName: 'Examples',
-
-	    render: function render() {
-	        return React.createElement(
-	            'h2',
-	            null,
-	            'Examples Component'
-	        );
-	    }
-	});
+	var Examples = function Examples() {
+	    return React.createElement(
+	        'h2',
+	        null,
+	        'Examples Component'
+	    );
+	};
 
 	module.exports = Examples;
 
