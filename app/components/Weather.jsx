@@ -20,6 +20,7 @@ const Weather = React.createClass({
                 desc: obj.apiDesc,
                 country: obj.apiCountry,
                 name: obj.apiName,
+                icon: obj.apiIcon,
                 isLoading: false
               });
          }.bind(this), function(errorMessage) {
@@ -35,14 +36,18 @@ const Weather = React.createClass({
          }.bind(this));
     },
     render: function () {
-        var {isLoading, temperature, location} = this.state;
+        var {location, temperature, desc, country, name, icon, isLoading} = this.state;
         function renderMessage() {
             if (isLoading) {
                 return <h3>Fetching Weather Data...</h3>
             } else if (temperature && location) {
                 return <WeatherMessage
-                    location={location}
-                    temperature={temperature} />
+                    msgLocation={location}
+                    msgName={name}
+                    msgCountry={country}
+                    msgDesc={desc}
+                    msgTemp={temperature}
+                    msgIcon={icon} />
             }
         }
         return (

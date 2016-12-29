@@ -13,10 +13,12 @@ module.exports = {
         throw new Error(res.data.message);
       } else {
         return {
+          apiName: res.data.name,
           apiTemp: res.data.main.temp,
           apiDesc: res.data.weather[0].description,
           apiCountry: res.data.sys.country,
-          apiName: res.data.name
+          apiName: res.data.name,
+          apiIcon: res.data.weather[0].icon
         };
       }
     }, function (res) {
