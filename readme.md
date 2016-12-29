@@ -19,5 +19,8 @@ Using the Open Weather Map API to search for current weather data around the glo
 * babel-preset-es2015
 * babel-preset-react
 
-#### front-end
-* Bootstrap
+* css-loader
+* script-loader
+* style-loader
+* jquery
+* foundation-sites
