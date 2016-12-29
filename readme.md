@@ -24,3 +24,5 @@ Using the Open Weather Map API to search for current weather data around the glo
 * style-loader
 * jquery
 * foundation-sites
+* sass-loader
+* node-sass
