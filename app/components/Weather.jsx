@@ -10,7 +10,16 @@ const Weather = React.createClass({
         });
     },
     handleNewSearch: function(data) {
-        this.setState({isLoading: true});
+        this.setState({
+            isLoading: true,
+            errorMessage: undefined,
+            location: undefined,
+            temperature: undefined,
+            desc: undefined,
+            country: undefined,
+            name: undefined,
+            icon: undefined
+        });
         console.log('new location to search for:', data.location);
         var newLocation = data.location;
         openWeatherMap.getTemp(newLocation).then( function(obj) {
@@ -36,11 +45,23 @@ const Weather = React.createClass({
          }.bind(this));
     },
     componentDidMount: function () {
-        var locationQuery = this.props.location.query.location;
+        var locationQuery = this.props.location.query;
+        console.log('locationQuery is:',locationQuery);
 
-        if (locationQuery && locationQuery.length > 0) {
-            this.handleNewSearch(this.props.location.query);
+        if (locationQuery.location && locationQuery.location.length > 0) {
+            this.handleNewSearch(locationQuery);
+            window.location.hash = '#/';
         }
+    },
+    componentWillReceiveProps: function(newProps) {
+        var locationQuery = newProps.location.query;
+        console.log('locationQuery is:',locationQuery);
+
+        if (locationQuery.location && locationQuery.location.length > 0) {
+            this.handleNewSearch(locationQuery);
+            window.location.hash = '#/';
+        }
+
     },
     render: function () {
         var {location, temperature, desc, country, name, icon, isLoading} = this.state;

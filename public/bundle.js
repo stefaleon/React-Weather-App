@@ -26498,7 +26498,13 @@
 
 	  onSearch: function onSearch(e) {
 	    e.preventDefault();
-	    alert("not yet implemented!");
+	    console.log(this.refs.searchLocation.value);
+	    var encodedLocation = encodeURIComponent(this.refs.searchLocation.value);
+	    if (this.refs.searchLocation.value.length > 0) {
+	      console.log('fi', this.refs.searchLocation.value);
+	      window.location.hash = '#/?location=' + encodedLocation;
+	      this.refs.searchLocation.value = '';
+	    }
 	  },
 	  render: function render() {
 	    return React.createElement(
@@ -26556,7 +26562,7 @@
 	            React.createElement(
 	              'li',
 	              null,
-	              React.createElement('input', { type: 'search', placeholder: 'Search Weather' })
+	              React.createElement('input', { type: 'search', ref: 'searchLocation', placeholder: 'Search Weather' })
 	            ),
 	            React.createElement(
 	              'li',
@@ -26592,7 +26598,16 @@
 	        };
 	    },
 	    handleNewSearch: function handleNewSearch(data) {
-	        this.setState({ isLoading: true });
+	        this.setState({
+	            isLoading: true,
+	            errorMessage: undefined,
+	            location: undefined,
+	            temperature: undefined,
+	            desc: undefined,
+	            country: undefined,
+	            name: undefined,
+	            icon: undefined
+	        });
 	        console.log('new location to search for:', data.location);
 	        var newLocation = data.location;
 	        openWeatherMap.getTemp(newLocation).then(function (obj) {
@@ -26618,10 +26633,21 @@
 	        }.bind(this));
 	    },
 	    componentDidMount: function componentDidMount() {
-	        var locationQuery = this.props.location.query.location;
+	        var locationQuery = this.props.location.query;
+	        console.log('locationQuery is:', locationQuery);
 
-	        if (locationQuery && locationQuery.length > 0) {
-	            this.handleNewSearch(this.props.location.query);
+	        if (locationQuery.location && locationQuery.location.length > 0) {
+	            this.handleNewSearch(locationQuery);
+	            window.location.hash = '#/';
+	        }
+	    },
+	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+	        var locationQuery = newProps.location.query;
+	        console.log('locationQuery is:', locationQuery);
+
+	        if (locationQuery.location && locationQuery.location.length > 0) {
+	            this.handleNewSearch(locationQuery);
+	            window.location.hash = '#/';
 	        }
 	    },
 	    render: function render() {
