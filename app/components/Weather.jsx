@@ -35,19 +35,33 @@ const Weather = React.createClass({
              console.log(errorMessage);
          }.bind(this));
     },
+    componentDidMount: function () {
+        var locationQuery = this.props.location.query.location;
+
+        if (locationQuery && locationQuery.length > 0) {
+            this.handleNewSearch(this.props.location.query);
+        }
+    },
     render: function () {
         var {location, temperature, desc, country, name, icon, isLoading} = this.state;
         function renderMessage() {
             if (isLoading) {
                 return <h3 className="text-center">Fetching Weather Data...</h3>
             } else if (temperature && location) {
-                return <WeatherMessage
-                    msgLocation={location}
-                    msgName={name}
-                    msgCountry={country}
-                    msgDesc={desc}
-                    msgTemp={temperature}
-                    msgIcon={icon} />
+                if (temperature === 'not available') {
+                    return <div className="text-center">
+                        <h3>There are no available weather data
+                            for the location "{location}".</h3>
+                    </div>
+                } else {
+                    return <WeatherMessage
+                        msgLocation={location}
+                        msgName={name}
+                        msgCountry={country}
+                        msgDesc={desc}
+                        msgTemp={temperature}
+                        msgIcon={icon} />
+                }
             }
         }
         return (

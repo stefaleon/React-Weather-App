@@ -26617,6 +26617,13 @@
 	            console.log(errorMessage);
 	        }.bind(this));
 	    },
+	    componentDidMount: function componentDidMount() {
+	        var locationQuery = this.props.location.query.location;
+
+	        if (locationQuery && locationQuery.length > 0) {
+	            this.handleNewSearch(this.props.location.query);
+	        }
+	    },
 	    render: function render() {
 	        var _state = this.state,
 	            location = _state.location,
@@ -26635,13 +26642,27 @@
 	                    'Fetching Weather Data...'
 	                );
 	            } else if (temperature && location) {
-	                return React.createElement(WeatherMessage, {
-	                    msgLocation: location,
-	                    msgName: name,
-	                    msgCountry: country,
-	                    msgDesc: desc,
-	                    msgTemp: temperature,
-	                    msgIcon: icon });
+	                if (temperature === 'not available') {
+	                    return React.createElement(
+	                        'div',
+	                        { className: 'text-center' },
+	                        React.createElement(
+	                            'h3',
+	                            null,
+	                            'There are no available weather data for the location "',
+	                            location,
+	                            '".'
+	                        )
+	                    );
+	                } else {
+	                    return React.createElement(WeatherMessage, {
+	                        msgLocation: location,
+	                        msgName: name,
+	                        msgCountry: country,
+	                        msgDesc: desc,
+	                        msgTemp: temperature,
+	                        msgIcon: icon });
+	                }
 	            }
 	        }
 	        return React.createElement(
